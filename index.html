@@ -35,10 +35,11 @@
     <script>
       // 귀찮아서 안할겁니다. 예외처리
       var STORAGE_KEY = "done";
-      fetch(
-        "https://raw.githubusercontent.com/cccjaccck/toss-lottery-urls/master/result.json",
-        { cache: "no-cache" }
-      )
+      // fetch(
+      //   "https://raw.githubusercontent.com/cccjaccck/toss-lottery-urls/master/result.json",
+      //   { cache: "no-cache" }
+      // )
+      fetch("result.json")
         .then(function (res) {
           return res.json();
         })
