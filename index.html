@@ -34,7 +34,7 @@
   <body>
     <script>
       // 귀찮아서 안할겁니다. 예외처리
-      var STORAGE_KEY = "done";
+      var STORAGE_KEY = "scroll";
       // fetch(
       //   "https://raw.githubusercontent.com/cccjaccck/toss-lottery-urls/master/result.json",
       //   { cache: "no-cache" }
@@ -45,6 +45,12 @@
         })
         .then(function (data) {
           // localStorage.getItem(STORAGE_KEY);
+          var scrollButton = document.getElementById("scroll_back");
+          scrollButton.addEventListener("click", function () {
+            let id = localStorage.getItem(STORAGE_KEY);
+            document.getElementById(id)?.scrollIntoView();
+          });
+
           document.querySelector("p#date").innerText =
             data.date + "에 마지막 수정";
           document.querySelector("p#num").innerText =
@@ -53,9 +59,14 @@
             let url = data.result[i];
             let li = document.createElement("li");
             let a = document.createElement("a");
+            let id = url.replace("https://toss.im/_m/BUj6u2s?c=", "");
             a.href = url;
             // a.innerText = url.replace("https://toss.im/_m/BUj6u2s?c=", "");
             a.innerText = url;
+            a.id = id;
+            a.addEventListener("click", function () {
+              localStorage.setItem(STORAGE_KEY, a.id);
+            });
             li.appendChild(a);
             document.body.querySelector("ul.list").appendChild(li);
           }
@@ -77,6 +88,7 @@
     </p>
     <p id="date"></p>
     <p id="num"></p>
+    <button id="scroll_back">스크롤 돌아가기</button>
     <ul class="list"></ul>
     <div>작성자: Larry Park (cccjaccck)</div>
   </body>
