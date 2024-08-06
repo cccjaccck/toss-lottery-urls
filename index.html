@@ -25,6 +25,8 @@
           // localStorage.getItem(STORAGE_KEY);
           document.querySelector("p#date").innerText =
             data.date + "에 마지막 수정";
+          document.querySelector("p#num").innerText =
+            "복권 " + data.result.length + "개";
           for (let i = 0; i < data.result.length; i++) {
             let url = data.result[i];
             let li = document.createElement("li");
@@ -41,6 +43,7 @@
     <p>브라우저별로 적용될 것입니다(아마도)</p>
     <p style="font-size: 0.7em">정말 간단히 만들었고 오류가 있을 수 있습니다</p>
     <p id="date"></p>
+    <p id="num"></p>
     <ul class="list"></ul>
   </body>
 </html>
