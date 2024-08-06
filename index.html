@@ -15,7 +15,8 @@
       // 귀찮아서 안할겁니다. 예외처리
       var STORAGE_KEY = "done";
       fetch(
-        "https://raw.githubusercontent.com/cccjaccck/toss-lottery-urls/master/result.json"
+        "https://raw.githubusercontent.com/cccjaccck/toss-lottery-urls/master/result.json",
+        { cache: "no-cache" }
       )
         .then(function (res) {
           return res.json();
@@ -25,11 +26,12 @@
           document.querySelector("p#date").innerText =
             data.date + "에 마지막 수정";
           for (let i = 0; i < data.result.length; i++) {
-            let url = data[i];
+            let url = data.result[i];
             let li = document.createElement("li");
             let a = document.createElement("a");
             a.href = url;
-            a.innerText = url.replace("https://toss.im/_m/BUj6u2s?c=", "");
+            // a.innerText = url.replace("https://toss.im/_m/BUj6u2s?c=", "");
+            a.innerText = url;
             li.appendChild(a);
             document.body.querySelector("ul.list").appendChild(li);
           }
