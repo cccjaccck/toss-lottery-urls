@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>토스 복권 주소 모음</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // 귀찮아서 안할겁니다. 예외처리
+      var STORAGE_KEY = "done";
+      fetch(
+        "https://raw.githubusercontent.com/cccjaccck/toss-lottery-urls/master/result.json"
+      )
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          // localStorage.getItem(STORAGE_KEY);
+          document.querySelector("p#date").innerText =
+            data.date + "에 마지막 수정";
+          for (let i = 0; i < data.result.length; i++) {
+            let url = data[i];
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+            a.href = url;
+            a.innerText = url.replace("https://toss.im/_m/BUj6u2s?c=", "");
+            li.appendChild(a);
+            document.body.querySelector("ul.list").appendChild(li);
+          }
+        });
+    </script>
+    <p>한번 누른 주소는 보라색이 되게끔 하였습니다(아마도)</p>
+    <p>브라우저별로 적용될 것입니다(아마도)</p>
+    <p style="font-size: 0.7em">정말 간단히 만들었고 오류가 있을 수 있습니다</p>
+    <p id="date"></p>
+    <ul class="list"></ul>
+  </body>
+</html>
