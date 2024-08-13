@@ -1,3 +1,4 @@
-KakaoTalk_Chat*
-.ipynb_checkpoints
-.DS_store
+**/KakaoTalk_Chat*
+**/.ipynb_checkpoints
+**/.DS_store
+**/aa

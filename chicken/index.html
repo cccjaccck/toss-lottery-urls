@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FKM2RCFSNY"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-FKM2RCFSNY");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <title>토스 치킨 복권 주소 모음</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li a {
+      }
+
+      li a:visited {
+        color: brown;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // 귀찮아서 안할겁니다. 예외처리
+      var STORAGE_KEY = "scroll";
+      // fetch(
+      //   "https://raw.githubusercontent.com/cccjaccck/toss-lottery-urls/master/result.json",
+      //   { cache: "no-cache" }
+      // )
+      fetch("result.json")
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          // localStorage.getItem(STORAGE_KEY);
+          var scrollButton = document.getElementById("scroll_back");
+          scrollButton.addEventListener("click", function () {
+            let id = localStorage.getItem(STORAGE_KEY);
+            document.getElementById(id)?.scrollIntoView();
+          });
+
+          document.querySelector("p#date").innerText =
+            data.date + "에 마지막 수정";
+          document.querySelector("p#num").innerText =
+            "복권 " + data.result.length + "개";
+          for (let i = 0; i < data.result.length; i++) {
+            let url = data.result[i];
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+            let id = url.replace("https://toss.im/_m/RsAnqaf?c=", "");
+            a.href = url;
+            // a.innerText = url.replace("https://toss.im/_m/RsAnqaf?c=", "");
+            a.innerText = url;
+            a.id = id;
+            a.addEventListener("click", function () {
+              localStorage.setItem(STORAGE_KEY, a.id);
+            });
+            li.appendChild(a);
+            document.body.querySelector("ul.list").appendChild(li);
+          }
+        });
+    </script>
+    <p>
+      천만원 아니고
+      <span style="color: red; font-weight: bold">치킨</span>입니다.
+    </p>
+    <p>한번 누른 주소는 갈색이 되게끔 하였습니다(아마도)</p>
+    <p>브라우저에 따라 한번씩 리셋될 수도 됩니다(경험)<br /></p>
+    <p>브라우저별로 적용될 것입니다(아마도)</p>
+    <p>
+      카톡에서 바로 여는것보다 <strong>외부브라우저</strong>를 처음부터 사용하길
+      권장드립니다
+    </p>
+    <p style="font-size: 0.7em">
+      정말 간단히 만들었고 오류가 있을 수 있습니다 + 재탕했습니다
+    </p>
+    <p>
+      <strong
+        >도움이 되셨다면 <br /><a href="https://open.kakao.com/o/gEyC37Gg"
+          >토스 치킨 복권 공유방 (카카오톡)</a
+        ><br />
+        여기로 오셔서 자신의 주소도
+        <span style="color: blue">공유</span>
+        해주시고 <br /><span style="color: blue">더 많은 복권</span>도
+        받아보세요🙇‍♀️ 🙇‍♂️<br
+      /></strong>
+    </p>
+    <p id="date"></p>
+    <p id="num"></p>
+    <button id="scroll_back">스크롤 돌아가기</button>
+    <ul class="list"></ul>
+    <div>작성자: Larry Park (cccjaccck)</div>
+  </body>
+</html>
